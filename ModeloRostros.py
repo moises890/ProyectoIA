@@ -4,9 +4,9 @@ import os
 imagesPath = "dataset" # Cambia a la ruta donde hayas almacenado la carpeta con las imágenes
 imagesPathList = os.listdir(imagesPath)
 
-if not os.path.exists('Rostros encontrados'):
+if not os.path.exists('ModeloRostros'):
 	print('Carpeta creada: Rostros encontrados')
-	os.makedirs('Rostros encontrados')
+	os.makedirs('ModeloRostros')
 
 faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 
@@ -30,7 +30,7 @@ for imageName in imagesPathList:
 			rostro = cv2.resize(rostro,(150,150), interpolation=cv2.INTER_CUBIC)
 			#cv2.imshow('rostro',rostro)
 			#cv2.waitKey(0)
-			cv2.imwrite('Rostros encontrados/rostro_{}.jpg'.format(count),rostro)
+			cv2.imwrite('ModeloRostros/rostro_{}.jpg'.format(count),rostro)
 			count = count +1
 	elif k == 27:
 		break

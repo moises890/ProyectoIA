@@ -1,0 +1,132 @@
+import ModeloEmociones
+import ModeloPersonas
+import ModeloRostros
+
+import EntrenaEmociones
+import ReconocimientoFacial
+
+import entrenaPersonas
+import ReconocePersonas
+
+import ModeloRostros
+
+from tkinter import *
+import functools
+
+
+
+
+def ventanaUno():
+    global window
+    window = Tk()
+    window.title("IA")
+    window.geometry('600x600')
+  
+
+    lbl = Label(window, text="Plataforma de reconocimiento de personas y sus emociones ", font=("Arial Bold",12 ))
+    lbl.grid(column=0, row=0)
+
+    btn = Button(window, text="EMOCIONES",command=ventanaDos)
+    btn.grid(column=0, row=1)
+    btn = Button(window, text="PERSONAS",command=ventanaTres)
+    btn.grid(column=0, row=2)
+    btn = Button(window, text="ROSTROS",command=ventanaCuatro)
+    btn.grid(column=0, row=3)
+
+
+    window.mainloop()
+
+def ventanaDos():
+    global window2 
+    window2 = Toplevel(window)
+    window2.title("EMOCIONES")
+    window2.geometry('900x700')
+    lbl = Label(window2, text="Reconocer emociones", font=("Arial Bold", 18))
+    lbl.grid(column=0, row=0)
+
+    
+    
+    lbl2 = Label(window2, text="Seleccione una emocion", font=("Arial Bold", 12))
+    lbl2.grid(column=0, row=2)
+  
+    btn = Button(window2, text="Sorpresa",command=ModeloEmociones.ModeloSorpresa)
+    btn.grid(column=1, row=3)
+    btn = Button(window2, text="Tristeza",command=ModeloEmociones.ModeloTristeza)
+    btn.grid(column=2, row=3)
+    btn = Button(window2, text="Enojo",command=ModeloEmociones.ModeloEnojo)
+    btn.grid(column=3, row=3)
+
+    btn = Button(window2, text="Felicidad",command=ModeloEmociones.ModeloFelicidad)
+    btn.grid(column=4, row=3)
+
+    btn = Button(window2, text="Entrenar",command=functools.partial(EntrenaEmociones.ejecuta))
+    btn.grid(column=1, row=6)
+
+    btn = Button(window2, text="Reconocer emociones",command=functools.partial(ReconocimientoFacial.reconoceEmocion))
+    btn.grid(column=1, row=7)
+
+
+    
+    btn = Button(window2, text="Regresar",command=functools.partial(ventanaDestroyer, window, window2))
+    btn.grid(column=1, row=8)
+
+    window.withdraw()
+
+
+
+def ventanaTres():
+
+    global window3
+    window3 = Toplevel(window)
+    window3.title("PERSONAS")
+    window3.geometry('900x700')
+    lbl = Label(window3, text=" Personas", font=("Arial Bold", 18))
+    lbl.grid(column=0, row=0)
+
+    btn = Button(window3, text="Capturar Persona",command=ModeloPersonas.ModeloPer)
+    btn.grid(column=1, row=3)
+    btn = Button(window3, text="Entrenar modelo",command=entrenaPersonas.entrena)
+    btn.grid(column=1, row=4)
+
+    btn = Button(window3, text="Reconocer Personas",command=ReconocePersonas.reconoce)
+    btn.grid(column=1, row=5)
+
+    btn = Button(window3, text="Regresar",command=functools.partial(ventanaDestroyer, window, window3))
+    btn.grid(column=1, row=6)
+
+    window.withdraw()
+
+
+
+def ventanaCuatro():
+    global window4
+    window4 = Toplevel(window)
+    window4.title("ROSTROS")
+    window4.geometry('900x700')
+    lbl = Label(window4, text=" Rostros", font=("Arial Bold", 18))
+    lbl.grid(column=0, row=0)
+
+    btn = Button(window4, text="Reconocer Rostros Dataset",command=ModeloRostros.ModeloRos)
+    btn.grid(column=1, row=3)
+
+
+
+
+
+
+    btn = Button(window4, text="Regresar",command=functools.partial(ventanaDestroyer, window, window4))
+    btn.grid(column=1, row=1)
+
+    window.withdraw()
+
+
+
+def ventanaDestroyer(ventanapadre,top):
+    ventanapadre.deiconify()
+    top.destroy()
+
+
+
+
+
+ventanaUno()

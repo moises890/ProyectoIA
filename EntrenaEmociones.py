@@ -20,23 +20,27 @@ def getmodel(metodo, facedata,label):
 
 dataPath = 'Emociones encontradas' #Cambia a la ruta donde hayas almacenado Data
 peopleList = os.listdir(dataPath)
-print('Lista de personas: ', peopleList)
+print('Lista de emociones: ', peopleList)
 
 labels = []
 facesData = []
 label = 0
 
-for nameDir in peopleList:
-	personPath = dataPath + '/' + nameDir
-	print('Leyendo las imágenes')
 
-	for fileName in os.listdir(personPath):
-		print('Rostros: ', nameDir + '/' + fileName)
-		labels.append(label)
-		facesData.append(cv2.imread(personPath+'/'+fileName,0))
-		#image = cv2.imread(personPath+'/'+fileName,0)
-		#cv2.imshow('image',image)
-		#cv2.waitKey(10)
-	label = label + 1
+def getit():
+	for nameDir in peopleList:
+		personPath = dataPath + '/' + nameDir
+		print('Leyendo las imágenes')
 
-getmodel("LBPH",facesData,labels)
+		for fileName in os.listdir(personPath):
+			print('Rostros: ', nameDir + '/' + fileName)
+			labels.append(label)
+			facesData.append(cv2.imread(personPath+'/'+fileName,0))
+		
+		label = label + 1
+
+
+
+def ejecuta():
+	getit()	
+	getmodel("LBPH",facesData,labels)
